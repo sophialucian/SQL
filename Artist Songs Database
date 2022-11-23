@@ -1,0 +1,57 @@
+CREATE TABLE artists (id INTEGER PRIMARY KEY, name TEXT, genre TEXT);
+
+INSERT INTO artists VALUES
+(1, "Harry Styles", "pop"),
+(2, "Justin Bieber", "pop"),
+(3, "Jack Harlow", "rap"),
+(4, "Morgan Wallen", "country"),
+(5, "Taylor Swift", "pop"),
+(6, "Luke Combs", "country");
+
+SELECT * FROM artists;
+
+CREATE TABLE songs (id INTEGER PRIMARY KEY AUTOINCREMENT, artist_id INTEGER, title TEXT, release_year INTEGER, album TEXT);
+
+INSERT INTO songs (artist_id, title, release_year, album) VALUES
+(1, "Adore You", 2019, "Fine Line"),
+(1, "Golden", 2019, "Fine Line"),
+(1, "Sign of the Times", 2017, "Harry Styles"),
+(1, "Late Night Talking", 2022, "Harry's House"),
+(1, "As It Was", 2022, "Harry's House"),
+(2, "Ghost", 2021, "Justice"),
+(2, "Peaches", 2021, "Justice"),
+(2, "Love Yourself", 2015, "Purpose"),
+(2, "Intentions", 2020, "Changes"),
+(2, "Baby", 2010, "My World 2.0"),
+(3, "First Class", 2022, "Come Home the Kids Miss You"),
+(3, "Tyler Herro", 2020, "Thats What They All Say"),
+(3, "GHOST", 2019, "Confetti"),
+(3, "SUNDOWN", 2018, "Loose"),
+(4, "Whiskey Glasses", 2018, "If I Know Me"),
+(4, "Chasin' You", 2018, "If I Know Me"),
+(4, "Sand in My Boots", 2021, "Dangerous"),
+(4, "You Proof", 2022, "You Proof"),
+(4, "Whiskey Glasses", 2018, "If I Know Me"),
+(5, "Mine", 2010, "Speak Now"),
+(5, "Fifteen", 2008, "Fearless"),
+(5, "Mine", 2010, "Speak Now"),
+(5, "All Too Well", 2012, "Red"),
+(6, "One Number Away", 2017, "This One's For You"),
+(6, "Better Together", 2019, "What You See is What You Get"),
+(6, "Beautiful Crazy", 2018, "This One's For You Too"),
+(6, "The Kind of Love We Make", 2022, "Growin' Up");
+
+SELECT * FROM songs;
+
+--join data from 2 tables together
+SELECT artists.name, songs.title
+    FROM artists
+    JOIN songs
+    ON artists.id = songs.artist_id;
+    
+--calculate number of songs per artist
+SELECT artists.name, COUNT(songs.title) AS song_count
+    FROM artists
+    LEFT OUTER JOIN songs
+    ON artists.id = songs.artist_id
+    GROUP BY artists.name;
